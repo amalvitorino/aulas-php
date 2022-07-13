@@ -84,6 +84,17 @@ exibeCidade();
 echo "<br>";
 function soma(){
     
-    echo $GLOBALS['idade'] + $GLOBALS['altura'] ;
+    echo $GLOBALS['idade'] +  $GLOBALS['altura'] ;
 }
 soma();
+
+echo "<hr>";
+//+++++++++++++++++ COnstantes +++++++++++++++++
+//constantes sao globais por defeito
+define("PI",2.14);
+echo 'calor de pi = '.PI;
+
+echo "<br>";
+
+define("TIMES",['barcelona','real madrid','chelse']);
+echo TIMES[0];
