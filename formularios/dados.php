@@ -6,7 +6,7 @@ if (isset($_POST['nome'])) {
     echo "O seu nome eh $nome, e seu email e $email";
 }
 
-if (isset($_POST['valor'])) {
+if (isset($_GET['valor'])) {
     $produto = $_GET['produto'];
     $valor = $_GET['valor'];
     echo "$produto, custa: $valor";

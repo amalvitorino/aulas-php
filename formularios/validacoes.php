@@ -20,32 +20,37 @@
      * FILTER_VALIDATE_URL
      */
 
+    /**
+     * sanitize 
+     * que serve para limpar as variaveis
+     */
+
     //TRABALHANDO COM FILTERS
 
         if(isset($_POST['btn-enviar'])){
             $erros = []; //arrays de erros
 
             $nome = $_POST['nome'];
-            $idade = $_POST['idade'];
-            $email = $_POST['email'];
-            $peso = $_POST['peso'];
+            $idade = filter_input(INPUT_POST,'idade',FILTER_SANITIZE_NUMBER_INT);
+            $email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL);
+            $peso = filter_input(INPUT_POST,'peso',FILTER_SANITIZE_NUMBER_FLOAT);
             $ip = $_POST['ip'];
-            $url = $_POST['url'];
+            $url = filter_input(INPUT_POST,'url',FILTER_SANITIZE_URL);
 
             //fazendo as validacoes
-            if (!filter_input(INPUT_POST,'idade',FILTER_VALIDATE_INT)) {
+            if (!filter_var($idade,FILTER_VALIDATE_INT)) {
                 $erros[] = "idade deve ser interiro";
             }
-            if (!filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
                 $erros[] = "email invalido";
             }
-            if (!filter_input(INPUT_POST,'peso',FILTER_VALIDATE_FLOAT)) {
+            if (!filter_var($peso,FILTER_VALIDATE_FLOAT)) {
                 $erros[] = "peso deve ser double";
             }
             if (!filter_input(INPUT_POST,'ip',FILTER_VALIDATE_IP)) {
-                $erros[] = "idade deve ser interiro";
+                $erros[] = "ip invalido";
             }
-            if (!filter_input(INPUT_POST,'url',FILTER_VALIDATE_URL)) {
+            if (!filter_var($url,FILTER_VALIDATE_URL)) {
                 $erros[] = "URL invalida";
             }
             if ($_POST['nome']=="") {

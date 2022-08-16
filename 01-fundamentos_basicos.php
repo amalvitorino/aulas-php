@@ -81,6 +81,7 @@ function exibeCidade(){
 }
 
 exibeCidade();
+
 echo "<br>";
 function soma(){
     
