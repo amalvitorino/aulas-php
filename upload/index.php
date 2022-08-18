@@ -11,35 +11,44 @@
 <body>
 
 
-<?php 
+    <?php
 
-if(isset($_POST['btnEnviar'])):
-    //var_dump($_FILES);
-    $formatosPermitidos = ['png','jpeg','jpg','gif'];
-    $extensao = pathinfo($_FILES['arquivo']['name'],PATHINFO_EXTENSION);
 
-    if(in_array($extensao,$formatosPermitidos)){
-        $pasta = "arquivos/";
-        $temporario = $_FILES['arquivo']['tmp_name'];
-        $novoNome = uniqid().".$extensao";
 
-        if(move_uploaded_file($temporario, $pasta.$novoNome)){
-            $messagem = "Upload feito com sucesso!";
-        }else{
-            $messagem = "nao foi possivel fazer o uplload";
+    if (isset($_POST['btnEnviar'])) :
+
+        $quantidade = count($_FILES['arquivo']['name']);
+
+        //var_dump($_FILES);
+        $formatosPermitidos = ['png', 'jpeg', 'jpg', 'gif'];
+
+        for ($i = 0; $i < $quantidade; $i++) {
+            # code...
+
+            $extensao = pathinfo($_FILES['arquivo']['name'][$i], PATHINFO_EXTENSION);
+
+            if (in_array($extensao, $formatosPermitidos)) {
+                $pasta = "arquivos/";
+                $temporario = $_FILES['arquivo']['tmp_name'][$i];
+                $novoNome = uniqid() . ".$extensao";
+
+                if (move_uploaded_file($temporario, $pasta . $novoNome)) {
+                     echo "Upload feito com sucesso! para $pasta $novoNome <br>";
+                 } else {
+                    echo "nao foi possivel fazer o uplload <br>";
+                 }
+            } else {
+                echo "o formato $extensao, nao eh permitido <br>";
+            }
         }
-    }else{
-        $messagem = "o formato $extensao, nao eh permitido";
-    }
 
-    echo $messagem;
-endif;
+    endif;
 
-?>
+    ?>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-    <input type="file" name="arquivo" id="">
-    <button type="submit" name="btnEnviar">Enviar</button>
+        <input type="file" name="arquivo[]" required multiple>
+        <button type="submit" name="btnEnviar">Enviar</button>
     </form>
 </body>
- 
+
 </html>
