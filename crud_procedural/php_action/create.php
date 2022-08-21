@@ -4,11 +4,20 @@ include_once 'db_connect.php';
 
 session_start();
 
+function clear($input){
+    global $conexao;
+    //sql
+    $var = mysqli_escape_string($conexao,$input);
+    //xss
+    $var = htmlspecialchars($var);
+    return $var;
+}
+
 if(isset($_POST['btn_registar'])){
-    $nome = mysqli_escape_string($conexao,$_POST['nome']);
-    $apelido = mysqli_escape_string($conexao,$_POST['apelido']);
-    $data_nascimento = mysqli_escape_string($conexao,$_POST['data_nascimento']);
-    $email = mysqli_escape_string($conexao,$_POST['email']);
+    $nome = clear($_POST['nome']);
+    $apelido = clear($_POST['apelido']);
+    $data_nascimento = clear($_POST['data_nascimento']);
+    $email = clear($_POST['email']);
 
     $sql = "INSERT INTO `alunos`(`nome`, `apelido`, `data_nascimento`, `email`) VALUES ('$nome','$apelido','$data_nascimento','$email')";
 

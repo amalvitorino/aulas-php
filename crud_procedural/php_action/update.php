@@ -4,12 +4,21 @@ include_once 'db_connect.php';
 
 session_start();
 
+function clear($input){
+    global $conexao;
+    //sql
+    $var = mysqli_escape_string($conexao,$input);
+    //xss
+    $var = htmlspecialchars($var);
+    return $var;
+}
+
 if(isset($_POST['btn_editar'])){
-    $nome = mysqli_escape_string($conexao,$_POST['nome']);
-    $apelido = mysqli_escape_string($conexao,$_POST['apelido']);
-    $data_nascimento = mysqli_escape_string($conexao,$_POST['data_nascimento']);
-    $email = mysqli_escape_string($conexao,$_POST['email']);
-    $id = mysqli_escape_string($conexao,$_POST['id']);
+    $nome = clear($_POST['nome']);
+    $apelido = clear($_POST['apelido']);
+    $data_nascimento = clear($_POST['data_nascimento']);
+    $email = clear($_POST['email']);
+    $id = clear($_POST['id']);
 
     $sql = "UPDATE `alunos` SET `nome` = '$nome', `apelido` = '$apelido', `data_nascimento` = '$data_nascimento', `email` = '$email' WHERE `alunos`.`id` = $id";
 
