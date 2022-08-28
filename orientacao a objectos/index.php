@@ -1,5 +1,5 @@
 <?php
- echo "<hr> Aula_1 <hr> <br>";
+echo "<hr> Aula_1 <hr> <br>";
 
 /**
  * nodestudio.com.br (curso basico de php)
@@ -10,9 +10,10 @@
  */
 
 
- //criando uma classe 
+//criando uma classe 
 //boas praticas: o nome da classe deve ser em maiuscula
- class Pessoa{ 
+class Pessoa
+{
     private  $nome;
     protected $email;
 
@@ -23,75 +24,85 @@
     }
 
     //metodos geters e setrs
-    public function getNome(){
+    public function getNome()
+    {
         return $this->nome;
     }
 
-    public function setNome($nome){
+    public function setNome($nome)
+    {
         $this->nome = $nome;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         //limpando a variavel, ou seja, validando-a
-        $this->email = filter_var($email,FILTER_SANITIZE_EMAIL);
+        $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
     }
 
 
 
-    public function falar($msg){
-        echo $this->nome." disse: $msg";
+    public function falar($msg)
+    {
+        echo $this->nome . " disse: $msg";
     }
+}
 
- }
-
- $pessoa1 = new Pessoa;
- $pessoa1->falar("Ola");
+$pessoa1 = new Pessoa;
+$pessoa1->falar("Ola");
 
 
- echo "<hr> Aula_2 <hr> <br>";
- //criando outra classe com os metodos de acesso privados
- class User extends Pessoa{
+echo "<hr> Aula_2 <hr> <br>";
+//criando outra classe com os metodos de acesso privados
+class User extends Pessoa
+{
     protected $senha;
 
     //metodo construtor 
     public function __construct()
     {
         $this->senha = "123";
-        $this->nome = "usuario".date('d');
+        $this->nome = "usuario" . date('d');
     }
 
-    public function getSenha(){
+    public function getSenha()
+    {
         return $this->senha;
     }
 
-    public function setSenha($senha){
+    public function setSenha($senha)
+    {
         $this->senha = $senha;
     }
 
-
-    public function logar($email, $senha){
-        if($email == $this->email && $senha == $this->senha){
-            echo $this->nome." está logado";
-        }else{
+    //metodo publico pode se preceder com publico
+    function logar($email, $senha)
+    {
+        if ($email == $this->email && $senha == $this->senha) {
+            echo $this->nome . " está logado";
+        } else {
             echo "Dados inválidos";
         }
     }
- }
+}
 
- $user = new User;
- $user->setEmail("am///al@123.com");
+$user = new User;
+$user->setEmail("am///al@123.com");
 
- $email = "amal@123.com";
- $senha = "123";
+$email = "amal@123.com";
+$senha = "123";
 
- $user->logar($email,$senha);
+$user->logar($email, $senha);
 
- /**
-  * Modificadores de acesso
-  *public dentro e fora da classe
-  *protected apenas dentro da classe e dentro dos escopos das classes herdeiras
-  */
+/**
+ * Modificadores de acesso
+ *public dentro e fora da classe
+ *protected apenas dentro da classe e dentro dos escopos das classes herdeiras
+ *private apenas dentro da classe
+ * os modificadores de acesso tambem servem para funcoes
+ */
