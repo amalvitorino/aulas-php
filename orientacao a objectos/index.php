@@ -13,12 +13,13 @@
  //criando uma classe 
 //boas praticas: o nome da classe deve ser em maiuscula
  class Pessoa{ 
-    private  $nome, $email;
+    private  $nome;
+    protected $email;
 
     //metodo construtor 
     public function __construct()
     {
-        
+        //conatrutor vazio, mas ele exiate por defeito
     }
 
     //metodos geters e setrs
@@ -54,7 +55,7 @@
  echo "<hr> Aula_2 <hr> <br>";
  //criando outra classe com os metodos de acesso privados
  class User extends Pessoa{
-    private $senha;
+    protected $senha;
 
     //metodo construtor 
     public function __construct()
@@ -73,7 +74,7 @@
 
 
     public function logar($email, $senha){
-        if($email == $this->getEmail() && $senha == $this->senha){
+        if($email == $this->email && $senha == $this->senha){
             echo $this->nome." está logado";
         }else{
             echo "Dados inválidos";
@@ -88,3 +89,9 @@
  $senha = "123";
 
  $user->logar($email,$senha);
+
+ /**
+  * Modificadores de acesso
+  *public dentro e fora da classe
+  *protected apenas dentro da classe e dentro dos escopos das classes herdeiras
+  */
