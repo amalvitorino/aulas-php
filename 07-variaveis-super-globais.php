@@ -3,7 +3,7 @@
 
 /**
  * $GLOBALS
- * $_SERVER --> conte informacao sobre cabecalho caminhos... tem varios indices
+ * $_SERVER --> contem informacao sobre cabecalho caminhos... tem varios indices
  * $_REQUEST
  * $_POST --> serve para colectar dados
  * $_GET --> tambem serve para colectar dados

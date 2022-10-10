@@ -1,0 +1,5 @@
+{
+    "require":{
+        "concur/slugify" : "3.2"
+    }
+}

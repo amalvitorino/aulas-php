@@ -1,4 +1,4 @@
-<?php
+ <?php
 //Header
 include_once 'includes/header.php';
 ?>
